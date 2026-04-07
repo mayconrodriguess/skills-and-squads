@@ -1,0 +1,22 @@
+{
+  "node": {
+    "description": "Default layout for Node.js or TypeScript projects.",
+    "directories": [
+      "tests/unit/services",
+      "tests/unit/utils",
+      "tests/integration/api",
+      "tests/integration/db",
+      "tests/e2e/flows"
+    ]
+  },
+  "python": {
+    "description": "Default layout for Python projects.",
+    "directories": [
+      "tests/unit/services",
+      "tests/unit/utils",
+      "tests/integration/api",
+      "tests/integration/db",
+      "tests/e2e/flows"
+    ]
+  }
+}

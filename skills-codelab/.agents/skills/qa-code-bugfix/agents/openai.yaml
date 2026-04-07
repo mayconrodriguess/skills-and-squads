@@ -1,0 +1,4 @@
+interface:
+  display_name: "QA Code Bugfix"
+  short_description: "QA audit, test, and recent-change bugfix flow"
+  default_prompt: "Use $qa-code-bugfix to audit app_build against the spec, fix a recent bug, and verify the result."
