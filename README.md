@@ -1,47 +1,54 @@
-# Skills e Estruturas para IA
+# Skills and Squads
 
-Repositorio para organizar skills reutilizaveis, templates operacionais, workflows e estruturas de apoio para uso pratico com IA.
+Repositorio para hospedar duas frentes principais de trabalho com IA:
 
-## Objetivo
+- `skills` reutilizaveis para tarefas especializadas
+- `squads` estruturadas para execucao colaborativa com agentes
 
-Separar o conteudo operacional e reutilizavel do material mais conceitual de prompt engineering. Aqui o foco e aplicacao pratica, reaproveitamento e organizacao de estruturas que podem ser usadas em diferentes projetos.
+## Estrutura do repositorio
 
-## Estrutura principal
+- [skills/](./skills) - biblioteca de skills reutilizaveis
+- [Squad/](./Squad) - area dedicada a squads e estruturas de execucao multiagente
 
-- [examples/](./examples) - exemplos de uso e referencia
-- [skill-codelab/](./skill-codelab) - materiais de estudo e laboratorio
-- [skills/](./skills) - skills reutilizaveis
-- [templates/](./templates) - modelos e estruturas base
-- [workflows/](./workflows) - fluxos operacionais e roteiros
-- [Squad/](./Squad) - pacote de equipe de desenvolvimento assistida por IA
+## Skills
 
-## Destaque: Squad
+A pasta [skills/](./skills) concentra assets reutilizaveis para diferentes contextos de uso com IA, incluindo:
 
-A pasta [Squad/](./Squad) concentra uma estrutura pronta para operar uma squad de desenvolvimento com IA, incluindo:
+- skills tecnicas
+- referencias operacionais
+- scripts de apoio
+- templates prontos para adaptacao
 
-- agentes especializados
-- skills por papel tecnico
-- workflows de inicio e governanca
-- memoria de contexto do projeto
-- materiais de setup e continuidade entre ferramentas
+## Squads
 
-Arquivos de entrada:
+A pasta [Squad/](./Squad) organiza pacotes de equipes assistidas por IA. Cada squad pode conter sua propria estrutura de agentes, memoria, workflows e guias de uso.
 
-- [Squad/README.md](./Squad/README.md)
-- [Squad/HOW_TO_USE_WITH_DIFFERENT_AIs.md](./Squad/HOW_TO_USE_WITH_DIFFERENT_AIs.md)
-- [Squad/API_KEYS_SETUP.md](./Squad/API_KEYS_SETUP.md)
+Squad publicada atualmente:
 
-## Relacao com o repositorio Prompt-Engineering-Guide
+- [Squad/Squad_Dev/](./Squad/Squad_Dev) - estrutura de squad de desenvolvimento com agentes especializados, memoria de projeto e materiais de operacao
+
+Arquivos de entrada da `Squad_Dev`:
+
+- [Squad/Squad_Dev/README.md](./Squad/Squad_Dev/README.md)
+- [Squad/Squad_Dev/HOW_TO_USE_WITH_DIFFERENT_AIs.md](./Squad/Squad_Dev/HOW_TO_USE_WITH_DIFFERENT_AIs.md)
+- [Squad/Squad_Dev/API_KEYS_SETUP.md](./Squad/Squad_Dev/API_KEYS_SETUP.md)
+
+## Posicionamento do repositorio
+
+Este repositorio foi organizado para servir como base publica de:
+
+- componentes reutilizaveis para IA
+- organizacao de agentes por funcao
+- estruturas de squads operacionais
+- modelos de execucao para desenvolvimento, documentacao e automacao
+
+## Relacao com Prompt-Engineering-Guide
 
 O repositorio [Prompt-Engineering-Guide](https://github.com/mayconrodriguess/Prompt-Engineering-Guide) continua focado em conceitos, tecnicas e organizacao de conhecimento sobre prompting.
 
-Este repositorio `skills` fica focado em:
+Ja este repositorio fica focado em material aplicavel no dia a dia:
 
-- assets reutilizaveis
-- estruturas de execucao
-- templates praticos
-- organizacao de agentes e workflows
-
-## Observacao
-
-Este repositorio funciona como biblioteca pratica para acelerar trabalho com IA em cenarios de desenvolvimento, T.I., seguranca, automacao e produtividade tecnica.
+- skills
+- squads
+- estruturas operacionais
+- templates de execucao
