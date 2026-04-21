@@ -1,99 +1,67 @@
 # Como Usar o Squad Dev com Diferentes IAs
 
-Esta Squad foi desenhada para ser **portátil** — a mesma pasta funciona em
-qualquer IA que leia arquivos do projeto. Este guia mostra **como ativar a Squad
-em cada ferramenta**.
+A Squad é portátil. A mesma pasta `Squad_Dev/` funciona em qualquer IA que leia arquivos do projeto. Este guia mostra só o que precisa ser configurado em cada ferramenta, nada a mais.
 
-> Princípio: a fonte da verdade é `.agents/agents.md` + `.agents/workflows/`
-> + `.agents/skills/`. Qualquer IA que leia esses arquivos vira a Squad.
+> Fonte da verdade: `.agents/agents.md` + `.agents/workflows/` + `.agents/skills/`.
+> Qualquer IA que leia esses arquivos vira a Squad.
 
 ---
 
-## Sumário
+## Regra persistente (texto padrão)
 
-1. [Claude Code (terminal)](#1-claude-code-terminal)
-2. [Claude Desktop (MCP filesystem)](#2-claude-desktop-mcp-filesystem)
-3. [Cursor](#3-cursor)
-4. [GitHub Copilot no VS Code](#4-github-copilot-no-vs-code)
-5. [Google Antigravity](#5-google-antigravity)
-6. [Gemini (CLI + AI Studio)](#6-gemini-cli--ai-studio)
-7. [ChatGPT (Plus / Team / Enterprise)](#7-chatgpt-plus--team--enterprise)
-8. [Windsurf / Cody / outras IAs de IDE](#8-windsurf--cody--outras-ias-de-ide)
-9. [Qualquer IA genérica (copy & paste)](#9-qualquer-ia-generica-copy--paste)
-10. [Dicas universais](#10-dicas-universais)
+O texto abaixo é o mesmo pra todas as IAs. O que muda é onde salvar:
+
+```
+Você é a Squad Dev. Antes de qualquer ação:
+1. Leia Squad_Dev/.agents/agents.md para identificar o agente certo.
+2. Leia a skill em Squad_Dev/.agents/skills/<skill>/SKILL.md.
+3. Leia Squad_Dev/production_artifacts/memory/AI_CONTEXT.md para retomar contexto.
+4. Código em Squad_Dev/app_build/.
+5. Documentação em Squad_Dev/production_artifacts/.
+6. Security Gate é bloqueante antes de deploy.
+```
 
 ---
 
 ## 1. Claude Code (terminal)
 
-**Melhor experiência nativa.** Claude Code descobre e carrega skills
-automaticamente quando você invoca um slash command como `/dev-squad`.
+Nativo. Skills auto-detectadas.
 
-### Setup
+1. Cole a `Squad_Dev/` na raiz do projeto.
+2. Rode `claude` na raiz.
+3. Use `/dev-squad <ideia>`.
 
-1. Copie a pasta `Squad_Dev/` para a raiz do seu projeto (ou use-a como raiz).
-2. Abra o terminal no diretório e rode:
-
-   ```bash
-   claude
-   ```
-
-3. Inicie a Squad:
-
-   ```
-   /dev-squad Quero criar um app de gestão de tarefas para equipes
-   ```
-
-### Como funciona por dentro
-
-- Claude Code varre `.claude/skills/` E `.agents/skills/` do projeto
-- Cada `SKILL.md` tem YAML frontmatter com `name` + `description` + triggers
-- Quando sua mensagem bate com triggers de uma skill, Claude carrega
-  o conteúdo integral dela (progressive disclosure)
-- Arquivos em `references/` são lidos só quando necessário
-
-### Comandos úteis
-| Comando | Ação |
-|---|---|
-| `/dev-squad <ideia>` | Pipeline completo (spec → deploy) |
-| `/startcycle <ideia>` | Alias |
-| `/securityscan` | Scan pontual de segurança |
-| `/designpage` | Landing page standalone |
-| `/buildapp` | App mobile |
+Não precisa configurar nada. Claude lê `.agents/skills/` automaticamente.
 
 ---
 
-## 2. Claude Desktop (MCP filesystem)
+## 2. Google Antigravity
 
-Claude Desktop não tem skills nativas ainda, mas com um servidor MCP de
-filesystem ele lê toda a Squad como contexto de projeto.
+Antigravity lê `.agents/` e segue os workflows nativamente. É a configuração mais simples depois do Claude Code.
 
-### Setup
-
-1. Instale o **Filesystem MCP server** seguindo a doc oficial da Anthropic.
-2. Configure `claude_desktop_config.json` apontando para o diretório do
-   projeto que contém `Squad_Dev/`.
-3. Inicie uma conversa dizendo:
+1. Cole a `Squad_Dev/` na raiz do workspace.
+2. Abra o workspace no Antigravity. Os agentes em `.agents/agents.md` aparecem disponíveis.
+3. Invoque o workflow no chat:
 
    ```
-   Leia os arquivos em Squad_Dev/.agents/agents.md e
-   Squad_Dev/.agents/workflows/startcycle.md. A partir de agora você é
-   a Squad Dev. Vamos começar: [sua ideia].
+   Execute Squad_Dev/.agents/workflows/startcycle.md para: [ideia].
+   Identifique os agentes em .agents/agents.md e siga as skills em .agents/skills/.
    ```
 
-4. Em cada nova thread, peça para ler `Squad_Dev/production_artifacts/memory/AI_CONTEXT.md`
-   para retomar o contexto.
+4. Para Security Gate:
+
+   ```
+   Execute Squad_Dev/.agents/workflows/sprint-security-gate.md no Sprint atual.
+   ```
+
+Antigravity tem terminal, browser e filesystem por padrão. Tratamento de Missions longas funciona bem com o `startcycle.md`.
 
 ---
 
 ## 3. Cursor
 
-Cursor suporta **Rules** (instruções persistentes) e **@-mentions** de arquivos.
-
-### Setup
-
-1. Coloque a `Squad_Dev/` na raiz do projeto.
-2. Crie `.cursor/rules/squad-dev.mdc` com:
+1. Cole a `Squad_Dev/` na raiz do projeto.
+2. Crie `.cursor/rules/squad-dev.mdc`:
 
    ```mdc
    ---
@@ -103,317 +71,132 @@ Cursor suporta **Rules** (instruções persistentes) e **@-mentions** de arquivo
    ---
 
    Você é a Squad Dev. Antes de qualquer ação:
-   1. Leia `Squad_Dev/.agents/agents.md` para identificar o agente certo.
-   2. Leia a skill correspondente em `Squad_Dev/.agents/skills/<skill>/SKILL.md`.
-   3. Leia `Squad_Dev/production_artifacts/memory/AI_CONTEXT.md` para retomar contexto.
-   4. Todo código do projeto vai em `Squad_Dev/app_build/`.
-   5. Toda documentação vai em `Squad_Dev/production_artifacts/`.
-   6. Security Gate é bloqueante antes de deploy.
+   1. Leia Squad_Dev/.agents/agents.md.
+   2. Leia a skill em Squad_Dev/.agents/skills/<skill>/SKILL.md.
+   3. Leia Squad_Dev/production_artifacts/memory/AI_CONTEXT.md.
+   4. Código em Squad_Dev/app_build/.
+   5. Docs em Squad_Dev/production_artifacts/.
+   6. Security Gate bloqueante antes de deploy.
    ```
 
-3. No chat, use @-refs para puxar skills específicas:
+3. No chat:
 
    ```
-   Aja como @solution-architect (ver @Squad_Dev/.agents/skills/solution_architect/SKILL.md).
+   Aja como @solution-architect (@Squad_Dev/.agents/skills/solution_architect/SKILL.md).
    Projete a arquitetura para: [ideia].
    ```
 
-### Dicas Cursor
-
-- Composer Mode + @Folder da `Squad_Dev/` = IA lê tudo de uma vez
-- YOLO mode bom para fases rotineiras (scaffolding); desative em tarefas críticas
-
 ---
 
-## 4. GitHub Copilot no VS Code
+## 4. VS Code + GitHub Copilot
 
-Copilot Chat suporta **Custom Instructions** e **@workspace**.
-
-### Setup
-
-1. Abra o projeto com `Squad_Dev/` no VS Code.
-2. Crie `.github/copilot-instructions.md` na raiz do repo:
-
-   ```markdown
-   # Copilot Instructions — Squad Dev
-
-   Este repositório usa a Squad Dev (pasta `Squad_Dev/`).
-
-   Regras:
-   - Todo código do projeto fica em `Squad_Dev/app_build/`.
-   - Documentação em `Squad_Dev/production_artifacts/`.
-   - Memória viva: `Squad_Dev/production_artifacts/memory/AI_CONTEXT.md`.
-   - Agentes definidos em `Squad_Dev/.agents/agents.md`.
-   - Skills em `Squad_Dev/.agents/skills/<name>/SKILL.md`.
-   - Security Gate é obrigatório antes de qualquer deploy.
-
-   Quando receber uma tarefa, identifique o agente adequado em `agents.md`
-   e siga o workflow da skill correspondente.
-   ```
-
+1. Cole a `Squad_Dev/` na raiz do projeto.
+2. Crie `.github/copilot-instructions.md` na raiz do repo com o texto padrão (seção "Regra persistente" acima).
 3. No Copilot Chat:
 
    ```
-   @workspace Leia agents.md e a skill solution_architect. Projete a
-   arquitetura do seguinte: [ideia].
+   @workspace Aja como solution-architect seguindo
+   #file:Squad_Dev/.agents/skills/solution_architect/SKILL.md.
+   Projete a arquitetura para: [ideia].
    ```
-
-### Dicas Copilot
-
-- VS Code 1.90+ já lê `.github/copilot-instructions.md` automaticamente
-- Use Chat Participants (@workspace, @terminal) para ampliar contexto
-- `Ctrl+I` para inline edit dentro do arquivo
 
 ---
 
-## 5. Google Antigravity
+## 5. Windsurf (Cascade)
 
-Antigravity é o IDE agentic da Google — entende pastas `.agent/` e `.agents/`.
-
-### Setup
-
-1. Abra o projeto contendo `Squad_Dev/` no Antigravity.
-2. Os arquivos `.agents/agents.md` e `.agents/skills/` são reconhecidos como
-   contexto de agentes disponíveis.
-3. Invoque o agente no chat:
+1. Cole a `Squad_Dev/` na raiz do projeto.
+2. Crie `.windsurfrules` na raiz com o texto padrão.
+3. No Cascade, use `@` pra anexar arquivos:
 
    ```
-   Ative a Squad Dev conforme Squad_Dev/.agents/agents.md.
-   Vamos iniciar: [sua ideia].
+   Aja como solution-architect. Leia @SKILL.md em
+   Squad_Dev/.agents/skills/solution_architect/. Projete: [ideia].
    ```
-
-4. Antigravity expõe agentes via menu; aponte-os para as SKILLs quando possível.
-
-### Dicas Antigravity
-
-- Aproveite as "Missions" para workflows longos (startcycle funciona bem assim)
-- O agente tem acesso a terminal, browser e filesystem por padrão
-- Ative o Security Gate como checkpoint explícito antes de deploy
 
 ---
 
-## 6. Gemini (CLI + AI Studio)
+## 6. Claude Desktop (MCP filesystem)
+
+1. Configure o MCP filesystem apontando pra raiz do projeto.
+2. Em cada nova thread, cole o texto padrão e a tarefa:
+
+   ```
+   [texto padrão]
+
+   Aja como solution-architect e projete a arquitetura para: [ideia].
+   ```
+
+---
+
+## 7. Gemini CLI / AI Studio
 
 ### Gemini CLI
 
-1. Instale o Gemini CLI oficial.
-2. No diretório do projeto:
-
-   ```bash
-   gemini --system-instruction "$(cat Squad_Dev/.agents/agents.md)"
-   ```
-
-   Ou passe como contexto via `--file`.
-
-3. Inicie a tarefa:
+1. Cole a `Squad_Dev/` na raiz do projeto.
+2. Crie `GEMINI.md` na raiz com o texto padrão.
+3. Rode `gemini` na raiz. O `GEMINI.md` é lido automaticamente.
+4. Invoque:
 
    ```
-   Leia Squad_Dev/.agents/workflows/startcycle.md e execute a Fase 0
-   para: [ideia].
+   @Squad_Dev/.agents/skills/solution_architect/SKILL.md
+   Projete a arquitetura para: [ideia].
    ```
 
-### Google AI Studio (web)
+### AI Studio (web)
 
-1. Abra [aistudio.google.com](https://aistudio.google.com).
-2. Cole o conteúdo de `.agents/agents.md` no campo **System Instructions**.
-3. Faça upload dos SKILL.md relevantes quando necessário.
-4. Use Gemini 1.5+ Pro — a janela de contexto longa cabe toda a Squad.
+1. Cole `.agents/agents.md` em System Instructions.
+2. Faça upload da SKILL.md do agente ativo quando mudar de fase.
 
 ---
 
-## 7. ChatGPT (Plus / Team / Enterprise)
+## 8. ChatGPT (Projects)
 
-ChatGPT não lê arquivos do filesystem, mas aceita upload + Projects.
-
-### Setup via Projects (recomendado)
-
-1. Crie um novo **Project** e nomeie "Squad Dev — [NomeDoProjeto]".
-2. Em **Project Instructions**, cole:
-
-   ```
-   Você é a Squad Dev. Os arquivos anexados definem:
-   - agents.md: os 12 agentes da squad
-   - startcycle.md: o pipeline completo
-   - SKILL.md: instruções por agente
-
-   Antes de cada resposta, identifique o agente correto e siga sua SKILL.
-   Quando terminar uma fase, descreva o que salvaria em
-   production_artifacts/memory/AI_CONTEXT.md.
-
-   Como eu vou colar respostas em arquivos do meu repo local, entregue
-   saídas prontas para copiar (markdown, código) sempre que possível.
-   ```
-
-3. Faça upload dos arquivos chave:
-   - `.agents/agents.md`
-   - `.agents/workflows/startcycle.md`
-   - `.agents/skills/dev-squad/SKILL.md`
-   - SKILL.md dos agentes que você vai usar
-
-4. Inicie:
-   ```
-   Ative o fluxo /dev-squad com: [sua ideia]
-   ```
-
-### Alternativa: custom GPT
-
-Crie um **Custom GPT** com `.agents/agents.md` no System Prompt e os SKILL.md
-na Knowledge Base. Torna a Squad invocável com um clique.
+1. Crie um Project.
+2. Faça upload de `.agents/agents.md`, `.agents/workflows/startcycle.md` e as SKILL.md que vai usar.
+3. Em Project Instructions, cole o texto padrão.
+4. Inicie: `Ative /dev-squad para: [ideia]`.
 
 ---
 
-## 8. Windsurf / Cody / outras IAs de IDE
+## 9. Qualquer outra IA
 
-### Windsurf (Cascade)
-
-1. Abra o projeto com `Squad_Dev/`.
-2. Crie `.windsurfrules` na raiz (similar ao Cursor):
-
-   ```
-   Você é a Squad Dev. Leia Squad_Dev/.agents/agents.md antes de agir.
-   Código em Squad_Dev/app_build/, docs em Squad_Dev/production_artifacts/.
-   ```
-
-3. Cascade lê a pasta completa de forma agentic.
-
-### Sourcegraph Cody
-
-1. Adicione `Squad_Dev/` ao context filter do Cody.
-2. Crie um **Custom Command** apontando para `.agents/workflows/startcycle.md`.
-3. Use `@-mention` para puxar skill específica.
-
-### Zed AI / Supermaven / outros
-
-A maioria aceita um arquivo de instruções por projeto. Aponte-o para
-`.agents/agents.md` e a Squad ativa.
+Se a ferramenta não tem arquivo de regras, cole o texto padrão como primeira mensagem da sessão. Reitere quando a IA esquecer.
 
 ---
 
-## 9. Qualquer IA genérica (copy & paste)
+## Matriz resumida
 
-Se a IA não lê arquivos:
-
-### Passo 1 — System Prompt
-
-Cole isto como system prompt ou primeira mensagem:
-
-```
-Você é a Squad Dev, uma equipe de 12 agentes especializados em desenvolvimento
-de software. Os agentes são:
-
-@product-owner, @product-manager, @solution-architect, @documentation-writer,
-@database-specialist, @backend-specialist, @frontend-specialist,
-@ai-page-designer, @mobile-developer, @qa-engineer, @security-specialist,
-@devops-engineer.
-
-Fluxo padrão: spec → arquitetura → implementação paralela (backend, frontend,
-mobile, db) → QA → Security Gate (bloqueante) → deploy.
-
-Regras:
-- Código sempre em app_build/
-- Documentação sempre em production_artifacts/
-- Memória viva em production_artifacts/memory/AI_CONTEXT.md
-- Security Gate é obrigatório antes de qualquer deploy
-
-Para cada tarefa, anuncie qual agente está atuando e siga o padrão:
-Required Inputs → Workflow → Deliverables → Quality Bar.
-```
-
-### Passo 2 — Contexto por fase
-
-Cole o conteúdo de `SKILL.md` do agente ativo quando mudar de fase.
-
-### Passo 3 — Memória
-
-Ao mudar de IA ou de sessão, comece colando o conteúdo atual de
-`AI_CONTEXT.md`.
-
----
-
-## 10. Dicas universais
-
-### Mantenha a memória viva
-
-Depois de cada interação significativa, peça à IA para **atualizar**
-`production_artifacts/memory/AI_CONTEXT.md` com:
-
-- Stack aprovada
-- Sprint atual + status
-- Onde parou exatamente
-- Próximos passos
-- Decisões importantes do dia
-
-Isso é o que torna a Squad realmente portátil.
-
-### Use Progressive Disclosure
-
-Nunca peça à IA para carregar **todas** as skills de uma vez. Ela deve:
-
-1. Ler `.agents/agents.md` (curto)
-2. Identificar o agente/skill relevante
-3. Carregar só a SKILL.md daquele agente
-4. Abrir `references/` da skill só quando precisar de detalhe
-
-### Sessões curtas > sessões épicas
-
-Modelos degradam com contexto muito longo. Feche a sessão ao fim de cada fase,
-salve o estado em `AI_CONTEXT.md`, abra nova sessão na próxima.
-
-### Sempre valide Security Gate
-
-Independente da IA, antes de deployar produção:
-
-```
-Execute o protocolo .agents/skills/dev-squad/references/security-gate.md
-no código atual de app_build/ e entregue o Security_Gate_Report.md.
-```
-
-### Troubleshooting
-
-| Sintoma | Causa provável | Fix |
+| IA | Onde salvar a regra | Invocação |
 |---|---|---|
-| "IA não conhece os agentes" | Não leu `agents.md` | Cole o arquivo como contexto |
-| "IA refaz o que já foi feito" | Perdeu `AI_CONTEXT.md` | Cole-o no início da sessão |
-| "IA pula o Security Gate" | Não tratou como bloqueante | Reitere no prompt: "gate é bloqueante" |
-| "IA coloca código fora de `app_build/`" | Regra de estrutura ignorada | Cole a seção "Regras Fundamentais" do README |
-| "Skills conflitam entre si" | Carregou várias ao mesmo tempo | Load apenas a do agente ativo |
+| Claude Code | (nativo) | `/dev-squad <ideia>` |
+| Antigravity | (nativo) | "Execute .agents/workflows/startcycle.md" |
+| Cursor | `.cursor/rules/squad-dev.mdc` | `@skill` + pedido |
+| Copilot (VS Code) | `.github/copilot-instructions.md` | `@workspace #file:SKILL.md` |
+| Windsurf | `.windsurfrules` | `@SKILL.md` + pedido |
+| Claude Desktop | System prompt da thread | Cole texto padrão + tarefa |
+| Gemini CLI | `GEMINI.md` | `@SKILL.md` + pedido |
+| AI Studio | System Instructions | Upload SKILL.md por fase |
+| ChatGPT Projects | Project Instructions | Upload + ative workflow |
 
 ---
 
-## Matriz de Capacidades
+## Dicas universais
 
-| IA | Lê filesystem | Skills auto | Rules/Instrução persistente | Agentic (terminal/tools) |
-|---|---|---|---|---|
-| Claude Code | Sim | Sim | CLAUDE.md | Sim |
-| Claude Desktop + MCP | Sim (via MCP) | Não | Project | Parcial |
-| Cursor | Sim | Não | `.cursor/rules/*.mdc` | Sim |
-| GitHub Copilot (VS Code) | @workspace | Não | `.github/copilot-instructions.md` | Sim |
-| Antigravity | Sim | Parcial (agentes) | Workspace | Sim |
-| Gemini CLI | Via CLI flags | Não | `--system-instruction` | Sim |
-| AI Studio | Upload | Não | System Instructions | Não |
-| ChatGPT (Projects) | Upload | Não | Project Instructions | Parcial |
-| ChatGPT (Custom GPT) | Knowledge base | Não | System Prompt | Parcial |
-| Windsurf | Sim | Não | `.windsurfrules` | Sim |
-| Cody | Sim | Via Commands | Context filters | Parcial |
+**Aprendizado por correção (nativo em toda sessão).** Quando você corrigir o agente duas vezes sobre a mesma coisa, ou usar "sempre", "nunca", "toda vez", o agente salva automaticamente a regra em `AI_CONTEXT.md` na seção "Regras Aprendidas" e a aplica em toda sessão seguinte. Você também pode pedir direto: "salva isso na memória" ou "lembra disso". A regra entra no contexto de qualquer IA que ler o `AI_CONTEXT.md` a partir daí.
 
-> "Skills auto" = a IA carrega uma SKILL.md sozinha quando o trigger bate.
-> "Parcial" = depende da config do usuário ou de MCP/extensões.
+**Memória viva.** Ao fim de cada fase, peça: "Atualize `production_artifacts/memory/AI_CONTEXT.md` com stack, sprint atual, onde paramos e próximos passos."
+
+**Progressive disclosure.** Não carregue todas as skills de uma vez. Carregue só a do agente ativo. Abra `references/` quando precisar de detalhe.
+
+**Sessões curtas.** Feche a sessão ao fim de cada fase, salve em `AI_CONTEXT.md`, abra nova sessão na próxima.
+
+**Security Gate.** Antes de qualquer deploy:
+
+```
+Execute Squad_Dev/.agents/workflows/sprint-security-gate.md no código atual
+de app_build/ e entregue o Security_Gate_Report.md.
+```
 
 ---
 
-## Quando pedir ajuda ao Squad
-
-Prompts que funcionam em qualquer IA, desde que ela tenha lido `agents.md`:
-
-- "Aja como @solution-architect. Projete a arquitetura para: [X]"
-- "Aja como @backend-specialist. Implemente o endpoint: [X]"
-- "Execute Security Gate do Sprint atual"
-- "Retome conforme `AI_CONTEXT.md`"
-- "Ative o pipeline /dev-squad para: [ideia]"
-
-Se a IA estiver confusa, lembre-a: "você é a Squad Dev, os agentes estão em
-`.agents/agents.md`, as skills em `.agents/skills/`."
-
----
-
-**Versão**: 1.0 — compatível com Squad Dev v3
+**Versão**: 2.0, compatível com Squad Dev v3.

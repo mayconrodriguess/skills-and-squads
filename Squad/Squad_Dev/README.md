@@ -60,6 +60,7 @@ ou
 |---------|-----------|
 | `/devsquad <ideia>` | Pipeline completo |
 | `/startcycle <ideia>` | Alias para /devsquad |
+| `/commit-push-pr` | Commit + push + PR + notificação Slack |
 | `/securitygate N` | Security Gate do Sprint N |
 | `/securityscan` | Scan de segurança pontual |
 | `/designpage` | Cria landing page standalone |
@@ -96,14 +97,58 @@ Squad_Dev/
 │
 ├── production_artifacts/
 │   ├── memory/
-│   │   ├── AI_CONTEXT.md            ← contexto vivo (ler sempre primeiro)
+│   │   ├── AI_CONTEXT.md            ← índice enxuto: % por Sprint + pointers (ler sempre primeiro)
 │   │   ├── project-brief.md         ← resumo do projeto
-│   │   └── sprints/                 ← histórico de sprints
+│   │   └── sprints/
+│   │       ├── sprint-1-context.md  ← contexto detalhado do Sprint (carrega sob demanda)
+│   │       ├── sprint-2-context.md
+│   │       └── ...
 │   └── ...                          ← toda documentação aqui
 │
 ├── API_KEYS_SETUP.md
 └── README.md
 ```
+
+---
+
+## Subagentes (economia de contexto)
+
+Cada tarefa de exploração, revisão ou geração roda em janela de contexto própria.
+A sessão principal registra só a pergunta e o resumo.
+
+| Subagente | Quando usar |
+|---|---|
+| `explore` | Encontrar onde algo está no código |
+| `code-reviewer` | Revisão antes de PR (contexto limpo, sem viés) |
+| `spec-analyst` | Analisar spec sem trazer tudo ao contexto |
+| `security-scanner` | Varredura rápida de segurança |
+| `test-generator` | Gerar testes por módulo ou Sprint |
+| `doc-writer` | Gerar README, OpenAPI, Deployment Guide, changelog |
+| `db-analyst` | Revisar schema, N+1, migrations |
+| `api-mapper` | Mapear todos os endpoints existentes |
+
+**Claude Code:** `.claude/agents/` (ativados automaticamente)
+**Outras IAs:** `subagents/<nome>-prompt.md` — cole em nova conversa
+
+Contexto salvo em `production_artifacts/memory/subagents/` após cada execução.
+
+---
+
+## Hooks (camada determinística)
+
+A Squad vem com hooks pré-configurados em `.claude/settings.json`.
+Diferente de instruções no `CLAUDE.md`, hooks **sempre executam**, sem depender do Claude lembrar.
+
+| Hook | Evento | O que faz |
+|---|---|---|
+| Prettier | `PostToolUse` em Edit/Write | Formata o arquivo após cada edição |
+| ESLint --fix | `PostToolUse` em Edit/Write `.ts/.tsx` | Corrige lint automaticamente |
+| Command Log | `PostToolUse` em Bash | Loga todos os comandos em `memory/command-log.txt` |
+| Proteção de arquivos | `PreToolUse` em Edit/Write | Bloqueia `.env`, chaves SSH, `node_modules` |
+| Comandos perigosos | `PreToolUse` em Bash | Bloqueia force push em main, `DROP DATABASE`, `rm -rf /` |
+| Notificação desktop | `Stop` | Avisa quando Claude termina a tarefa |
+
+Para adicionar hooks ou ver exemplos: `.agents/skills/dev-squad/references/hooks-guide.md`
 
 ---
 
@@ -121,7 +166,7 @@ Squad_Dev/
 
 ## Compatibilidade com IAs
 
-Esta Squad funciona com qualquer IA que leia arquivos. Guia completo por ferramenta em **[HOW_TO_USE_WITH_DIFFERENT_AIs.md](./HOW_TO_USE_WITH_DIFFERENT_AIs.md)**.
+Esta Squad funciona com qualquer IA que leia arquivos. Guia completo por ferramenta em **[HOW_TO_USE_WITH_DIFFERENT_AIs.md](./HOW_TO_USE_WITH_DIFFERENT_AIs.md)** ou na versão web **[index.html](./index.html)** (abra no navegador).
 
 | IA | Status |
 |----|-----------|
@@ -159,13 +204,14 @@ O Security Gate é **bloqueante** — nenhum Sprint é concluído e nenhum deplo
 
 ## Memória e Continuidade
 
-O arquivo `production_artifacts/memory/AI_CONTEXT.md` é atualizado após cada fase por cada agente. Ele contém:
+A memória é dividida em dois níveis, pra não estourar contexto:
 
-- Stack tecnológica aprovada
-- Status do Sprint atual
-- Onde paramos
-- Próximos passos
-- Decisões importantes
-- Contexto crítico
+**Nível 1, `AI_CONTEXT.md`** (índice enxuto, sempre leve)
+Stack, % de progresso por Sprint, status, onde paramos em 1 linha, pointers pros arquivos detalhados. Máximo 40 linhas. Lido em toda sessão.
 
-**Qualquer IA que ler esse arquivo pode retomar o projeto do ponto exato onde parou.**
+**Nível 2, `sprints/sprint-N-context.md`** (detalhe pesado, sob demanda)
+Um arquivo por Sprint entregável: user stories, ACs, decisões locais, QA, Security, próximo passo. Carregado só quando o agente está trabalhando naquele Sprint. Sprints passados ficam arquivados.
+
+**Regra de Sprint:** cada Sprint é uma fatia vertical testável e deployável. Janela máxima até produção: 2 a 3 Sprints.
+
+Qualquer IA que ler `AI_CONTEXT.md` + o `sprint-N-context.md` ativo retoma o projeto exatamente de onde parou, sem puxar histórico inteiro.
