@@ -1,0 +1,23 @@
+{
+  "skill_name": "gerador-curriculo",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Preciso criar meu currículo do zero. Sou desenvolvedor fullstack com 5 anos de experiência, trabalho com React, Node.js e AWS. Meu último emprego foi na startup TechBR como Senior Dev de 2021 até agora, antes disso trabalhei na Accenture por 3 anos como desenvolvedor júnior/pleno. Me formei em Sistemas de Informação na UFMG em 2018 e tenho certificação AWS Solutions Architect. Quero me candidatar a vagas de Tech Lead e Engenheiro Sênior, preferencialmente remoto.",
+      "expected_output": "Currículo completo em Markdown com cabeçalho, resumo profissional otimizado para ATS com palavras-chave de Desenvolvimento Fullstack/Tech Lead, seção de competências-chave com grid de tecnologias, experiências com bullets de impacto usando verbos de ação, formação, certificação AWS e oferta de versão Word e em inglês.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Tenho um currículo antigo aqui para você revisar e melhorar:\n\nJoana Silva\njoana@email.com | (11) 98765-4321\n\nOBJETIVO: Trabalhar na área de marketing\n\nEXPERIÊNCIA:\nAnalista de Marketing na Empresa X (2020-2023)\n- Responsável pelo marketing digital\n- Fazia campanhas no Google e Facebook\n- Ajudei a aumentar seguidores\n\nAnalista Júnior na Empresa Y (2018-2020)\n- Trabalhei com redes sociais\n- Montei relatórios\n\nFORMAÇÃO: Publicidade e Propaganda - ESPM 2018\n\nHabilidades: Word, PowerPoint, Google Analytics, Instagram, Facebook",
+      "expected_output": "Análise crítica do currículo original identificando pontos fracos (verbos passivos, falta de métricas, objetivo genérico), currículo reescrito com resumo profissional forte, bullets com verbos de ação e métricas estimadas, competências-chave alinhadas ao marketing digital, sugestão de palavras-chave ATS para a área.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Sou psicóloga clínica com 8 anos de experiência e quero fazer um currículo para me candidatar a cargos de consultora de RH e HRBP. Tenho pós-graduação em Gestão de Pessoas, certificação em Coaching pelo IBC, e experiência em um hospital (5 anos) e numa consultoria de RH (3 anos). Falo inglês avançado. Quero um visual elegante e executivo, com 2 páginas.",
+      "expected_output": "Currículo com posicionamento estratégico de Psicóloga → HRBP/Consultora RH, resumo que conecta experiência clínica à gestão de pessoas, competências-chave com termos de RH (People Analytics, Gestão de Desempenho, Desenvolvimento Organizacional, etc.), design executivo descrito detalhadamente, instruções de formatação Word, e oferta de adaptação para vagas específicas de HRBP.",
+      "files": []
+    }
+  ]
+}
