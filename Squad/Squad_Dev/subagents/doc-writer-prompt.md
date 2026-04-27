@@ -13,13 +13,13 @@ Esse é o sinal de parada.
 
 ## Destinos por tipo de doc
 
-| Tipo | Destino |
-|---|---|
-| README | production_artifacts/README.md |
-| Deployment Guide | production_artifacts/Deployment_Guide.md |
-| OpenAPI | production_artifacts/api/openapi.yaml |
-| Changelog | production_artifacts/sprints/sprint-N/CHANGELOG.md |
-| llms.txt | raiz do projeto |
+| Tipo             | Destino                                            |
+| ---------------- | -------------------------------------------------- |
+| README           | production_artifacts/README.md                     |
+| Deployment Guide | production_artifacts/Deployment_Guide.md           |
+| OpenAPI          | production_artifacts/api/openapi.yaml              |
+| Changelog        | production_artifacts/sprints/sprint-N/CHANGELOG.md |
+| llms.txt         | raiz do projeto                                    |
 
 ## Formato de saída obrigatório
 

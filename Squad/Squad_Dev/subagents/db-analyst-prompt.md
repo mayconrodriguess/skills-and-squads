@@ -16,7 +16,7 @@ Esse é o sinal de parada.
 - [ ] Tipos de dados adequados ao domínio
 - [ ] Índices em FKs e colunas de busca frequente
 - [ ] Constraints (NOT NULL, unique) onde necessário
-- [ ] N+1: findAll sem eager loading, SELECT * em loops
+- [ ] N+1: findAll sem eager loading, SELECT \* em loops
 - [ ] Migrations: ordem, reversibilidade, forward-compatibility
 - [ ] Nomenclatura consistente
 

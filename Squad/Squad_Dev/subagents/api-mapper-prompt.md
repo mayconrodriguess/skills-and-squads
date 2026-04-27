@@ -13,7 +13,7 @@ Esse é o sinal de parada.
 
 ## Fluxo
 
-1. Localizar arquivos de rota (routes/, controllers/, *.router.ts, app.get/post/put/delete/patch)
+1. Localizar arquivos de rota (routes/, controllers/, \*.router.ts, app.get/post/put/delete/patch)
 2. Para cada endpoint: método + path + auth + body + resposta
 3. Identificar middleware de auth por grupo de rotas
 4. Verificar spec OpenAPI em `production_artifacts/api/` se existir

@@ -28,20 +28,21 @@
 
 ## Documentos Importantes
 
-| Documento | Caminho | Status |
-|-----------|---------|--------|
-| Especificação Técnica | `production_artifacts/Technical_Specification.md` | [✅ Aprovado / 🔄 Em revisão] |
-| Arquitetura | `production_artifacts/Solution_Architecture.md` | [✅ / 🔄 / ❌ Pendente] |
-| Backlog | `production_artifacts/Product_Backlog.md` | [✅ / 🔄 / ❌] |
-| Roadmap de Sprints | `production_artifacts/Sprint_Roadmap.md` | [✅ / 🔄 / ❌] |
-| Último QA Report | `production_artifacts/sprint-N/QA_Report.md` | [✅ / ❌] |
-| Último Security Gate | `production_artifacts/sprint-N/Security_Gate_Report.md` | [✅ / ⚠️ / ❌] |
+| Documento             | Caminho                                                 | Status                        |
+| --------------------- | ------------------------------------------------------- | ----------------------------- |
+| Especificação Técnica | `production_artifacts/Technical_Specification.md`       | [✅ Aprovado / 🔄 Em revisão] |
+| Arquitetura           | `production_artifacts/Solution_Architecture.md`         | [✅ / 🔄 / ❌ Pendente]       |
+| Backlog               | `production_artifacts/Product_Backlog.md`               | [✅ / 🔄 / ❌]                |
+| Roadmap de Sprints    | `production_artifacts/Sprint_Roadmap.md`                | [✅ / 🔄 / ❌]                |
+| Último QA Report      | `production_artifacts/sprint-N/QA_Report.md`            | [✅ / ❌]                     |
+| Último Security Gate  | `production_artifacts/sprint-N/Security_Gate_Report.md` | [✅ / ⚠️ / ❌]                |
 
 ## Sprint Atual — Objetivos
 
 **Sprint [N] — [nome ou tema do sprint]**
 
 Features deste Sprint:
+
 - [ ] Feature A
 - [ ] Feature B
 - [ ] Feature C
@@ -51,6 +52,7 @@ Features deste Sprint:
 [Descreva o estado exato: qual fase foi completada, o que está em progresso, o que está bloqueado.]
 
 Exemplo:
+
 > Sprint 2 — Development concluído. QA Gate passou. Aguardando Security Gate.
 > `@security-specialist` precisa rodar o protocolo em `.agents/skills/dev-squad/references/security-gate.md`
 
@@ -64,15 +66,15 @@ Exemplo:
 
 [Decisões arquiteturais, de produto ou de processo que não estão óbvias no código.]
 
-| Decisão | Justificativa | ADR |
-|---------|---------------|-----|
+| Decisão                            | Justificativa                    | ADR                        |
+| ---------------------------------- | -------------------------------- | -------------------------- |
 | [ex: PostgreSQL em vez de MongoDB] | [ex: precisa de transações ACID] | [ex: ADRs/001-database.md] |
 
 ## Riscos e Dívida Técnica Conhecida
 
-| Item | Tipo | Severidade | Sprint Previsto |
-|------|------|-----------|-----------------|
-| [ex: Autenticação sem MFA] | Segurança | Alta | Sprint 3 |
+| Item                       | Tipo      | Severidade | Sprint Previsto |
+| -------------------------- | --------- | ---------- | --------------- |
+| [ex: Autenticação sem MFA] | Segurança | Alta       | Sprint 3        |
 
 ## Contexto Crítico
 
@@ -84,5 +86,5 @@ Exemplo:
 
 ---
 
-*Atualizar este arquivo após cada fase concluída.*
-*Histórico de sprints: `production_artifacts/memory/sprints/`*
+_Atualizar este arquivo após cada fase concluída._
+_Histórico de sprints: `production_artifacts/memory/sprints/`_

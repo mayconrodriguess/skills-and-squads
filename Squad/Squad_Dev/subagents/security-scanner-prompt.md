@@ -13,13 +13,13 @@ Esse é o sinal de parada.
 
 ## Checklist interno
 
-- [ ] Secrets hardcoded (AKIA, sk_live_, ghp_, xoxb-, password=, token= em código)
+- [ ] Secrets hardcoded (AKIA, sk*live*, ghp\_, xoxb-, password=, token= em código)
 - [ ] Inputs sem validação (SQL concatenado, eval, innerHTML, path traversal)
 - [ ] Dependências vulneráveis (package.json / requirements.txt)
 - [ ] Headers HTTP ausentes (CSP, X-Frame-Options, HSTS)
 - [ ] console.log com dados sensíveis
 - [ ] .env no .gitignore
-- [ ] CORS * em produção
+- [ ] CORS \* em produção
 - [ ] Endpoints admin sem auth
 
 ## Classificação

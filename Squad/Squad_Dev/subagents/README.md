@@ -13,16 +13,16 @@ A sessão principal registra apenas a pergunta e a resposta.
 
 ## Quando usar cada subagente
 
-| Subagente | Use quando | Prompt |
-|---|---|---|
-| **explore** | "Onde está X no código?" / "Qual arquivo faz Y?" | `explore-prompt.md` |
-| **code-reviewer** | Antes de abrir PR, revisão de Sprint | `code-reviewer-prompt.md` |
-| **spec-analyst** | "O que o spec diz sobre X?" / "Quais ACs cobrem Y?" | `spec-analyst-prompt.md` |
-| **security-scanner** | Cheque rápido de segurança / antes do Security Gate | `security-scanner-prompt.md` |
-| **test-generator** | "Gere testes para o módulo X" | `test-generator-prompt.md` |
-| **doc-writer** | "Gere o README" / "Atualize o Deployment Guide" | `doc-writer-prompt.md` |
-| **db-analyst** | "Revise o schema" / "Há N+1 no código?" | `db-analyst-prompt.md` |
-| **api-mapper** | "Quais endpoints existem?" / "O endpoint X está implementado?" | `api-mapper-prompt.md` |
+| Subagente            | Use quando                                                     | Prompt                       |
+| -------------------- | -------------------------------------------------------------- | ---------------------------- |
+| **explore**          | "Onde está X no código?" / "Qual arquivo faz Y?"               | `explore-prompt.md`          |
+| **code-reviewer**    | Antes de abrir PR, revisão de Sprint                           | `code-reviewer-prompt.md`    |
+| **spec-analyst**     | "O que o spec diz sobre X?" / "Quais ACs cobrem Y?"            | `spec-analyst-prompt.md`     |
+| **security-scanner** | Cheque rápido de segurança / antes do Security Gate            | `security-scanner-prompt.md` |
+| **test-generator**   | "Gere testes para o módulo X"                                  | `test-generator-prompt.md`   |
+| **doc-writer**       | "Gere o README" / "Atualize o Deployment Guide"                | `doc-writer-prompt.md`       |
+| **db-analyst**       | "Revise o schema" / "Há N+1 no código?"                        | `db-analyst-prompt.md`       |
+| **api-mapper**       | "Quais endpoints existem?" / "O endpoint X está implementado?" | `api-mapper-prompt.md`       |
 
 ## Como usar em outras IAs
 

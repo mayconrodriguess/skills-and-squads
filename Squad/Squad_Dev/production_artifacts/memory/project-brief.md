@@ -22,24 +22,28 @@
 
 ## Usuários Alvo
 
-| Persona | Descrição | Necessidade Principal |
-|---------|-----------|----------------------|
-| [ex: Admin] | [Gerencia o sistema] | [Dashboard com métricas] |
+| Persona             | Descrição                    | Necessidade Principal        |
+| ------------------- | ---------------------------- | ---------------------------- |
+| [ex: Admin]         | [Gerencia o sistema]         | [Dashboard com métricas]     |
 | [ex: Usuário Final] | [Usa o produto no dia a dia] | [Interface simples e rápida] |
 
 ## Escopo do MVP
 
 **MUST (obrigatório para lançar):**
+
 - [ ] Feature A
 - [ ] Feature B
 
 **SHOULD (importante mas não bloqueante):**
+
 - [ ] Feature C
 
 **COULD (se sobrar tempo):**
+
 - [ ] Feature D
 
 **WON'T (fora do escopo):**
+
 - Feature E — [motivo]
 
 ## Restrições Técnicas
@@ -56,12 +60,12 @@
 
 ## Roadmap de Sprints
 
-| Sprint | Objetivo | Status |
-|--------|----------|--------|
-| Sprint 1 | [tema] | [Planejado / Em progresso / Concluído] |
-| Sprint 2 | [tema] | [Planejado] |
+| Sprint   | Objetivo | Status                                 |
+| -------- | -------- | -------------------------------------- |
+| Sprint 1 | [tema]   | [Planejado / Em progresso / Concluído] |
+| Sprint 2 | [tema]   | [Planejado]                            |
 
 ---
 
-*Para contexto detalhado da sessão atual: `production_artifacts/memory/AI_CONTEXT.md`*
-*Para histórico de sprints: `production_artifacts/memory/sprints/`*
+_Para contexto detalhado da sessão atual: `production_artifacts/memory/AI_CONTEXT.md`_
+_Para histórico de sprints: `production_artifacts/memory/sprints/`_
