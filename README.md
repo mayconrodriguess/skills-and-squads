@@ -35,17 +35,6 @@ A pasta [Prompts/](https://github.com/mayconrodriguess/skills-squads-and-prompts
 
 Cada subpasta tem seu próprio README explicando o contexto e como usar.
 
-### Subpastas
-
-**[Prompts/Obsidian/](https://github.com/mayconrodriguess/skills-squads-and-prompts/tree/main/Prompts/Obsidian)**
-Procedimento completo para instalar e configurar o Obsidian com MCP. Funciona como passo a passo manual ou como documento executável por uma IA agente com acesso a terminal. Cobre plugin Local REST API, servidor MCP, configuração para Claude Desktop, Claude Code, Cursor e VS Code, startup automático e diagnóstico de erros.
-
-**[Prompts/Squad/](https://github.com/mayconrodriguess/skills-squads-and-prompts/tree/main/Prompts/Squad)**
-Prompts e guias relacionados à criação, operação e uso de squads multiagente. Templates de instruções de agente, estruturas de memória e fluxos de coordenação.
-
-**[Prompts/Skill/](https://github.com/mayconrodriguess/skills-squads-and-prompts/tree/main/Prompts/Skill)**
-Prompts e guias para criação e uso de skills para Claude e outros agentes. Inclui templates de SKILL.md, padrões de descrição e exemplos de skills técnicas.
-
 ## Posicionamento do repositório
 
 Este repositório foi organizado para servir como base pública de:
